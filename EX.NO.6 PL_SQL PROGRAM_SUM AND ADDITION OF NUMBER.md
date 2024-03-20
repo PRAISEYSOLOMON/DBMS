@@ -10,10 +10,23 @@
 5. End the begin section.
 
 ### Program:
-
+```
+DECLARE
+    num1 NUMBER := 10;
+    num2 NUMBER := 5;
+    result_add NUMBER;
+    result_sub NUMBER;
+BEGIN
+    result_add := num1 + num2;
+    result_sub := num1 - num2;
+    DBMS_OUTPUT.PUT_LINE('Addition: ' || num1 || ' + ' || num2 || ' = ' || result_add);
+    DBMS_OUTPUT.PUT_LINE('Subtraction: ' || num1 || ' - ' || num2 || ' = ' || result_sub);
+END;
+```
 
 ### Output:
 
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/ccef97f8-00b9-4971-aebf-29515ab0b5a3)
 
 ### Result:
 Thust the program was performed sucessfully.
