@@ -30,36 +30,66 @@ To create a student database and execute DDL queries using SQL.
 ### 2) Create a table student  and insert any two rows with the following fieds RegisterNumber,Name,Age,Address,Phone number
 
 ### SQL QUERY: 
-
-
+```
+create table students(
+    registernumber integer,
+    name varchar(50),
+    age integer,
+    address varchar(60),
+    phonenumber integer
+    
+);
+```
 ### OUTPUT:
+
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/5c333d62-8baf-4b25-97f5-e5c62c37f988)
+
 
 ### 3) Alter the above student table by adding another attribute department
 
 ### SQL QUERY: 
-
+```
+alter table students
+add department char(80);
+```
 ### OUTPUT:
+
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/6759c732-9298-4b65-8353-b8b6c53f1cbf)
 
 ### 4) Rename the student table to mystudent
 
 ### SQL QUERY: 
-
-
-
+```
+alter table students rename to mystudent;
+```
 ### OUTPUT:
+
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/c078909e-a5e7-4b0a-ba78-720afa92a55a)
+
 
 ### 5) Delete the mystudent rows using truncate keyword
 
 ### SQL QUERY: 
-
-
+```
+truncate table students
+```
 ### OUTPUT:
+
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/be0ed95c-7721-4aa5-87bf-de30a7503d86)
+
 ### 4) Drop the mystudent table
  
-### SQL QUERY: 
+### SQL QUERY:
 
+```
+drop table students
+
+```
 
 ### OUTPUT:
+
+![image](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/7d986525-8baf-4f4f-9c5a-1e22a34db18c)
+
 
 
 
