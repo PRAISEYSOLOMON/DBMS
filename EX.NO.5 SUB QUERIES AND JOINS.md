@@ -1,4 +1,4 @@
-# EX.NO.6 SubQueries, Views and Joins 
+# EX.NO.5 SubQueries, Views and Joins 
 ### DATE
 ## AIM
 ### To use SubQueries, Views and Joins in SQL 
@@ -68,47 +68,71 @@ INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES (40, 'OPERATIONS', 'BOSTON');
 
 ### Q1) List the name of the employees whose salary is greater than that of employee with empno 7566.
 
-
 ### QUERY:
-
-
+```
+ select ename from emp where sal>(select sal from emp where empno=7566);
+```
 ### OUTPUT:
+
+![314391796-6d72287f-f1c5-4176-890f-cddebfcdc702](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/09353c4b-c414-49b4-b58d-a3eba5af244c)
 
 ### Q2) List the ename,job,sal of the employee who get minimum salary in the company.
 
 ### QUERY:
-
-
+```
+select ename,job,sal from emp where sal = (select min(sal) from emp);
+```
 ### OUTPUT:
+
+![314391853-53461b03-340c-4dd5-a517-23c10080c764](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/bda90edc-b980-44fe-bfd2-8bec45f5c7fc)
 
 ### Q3) List ename, job of the employees who work in deptno 10 and his/her job is any one of the job in the department ‘SALES’.
 
 ### QUERY:
-
-
+```
+> SELECT ename, job
+-> FROM emp
+-> WHERE deptno = 10 AND job IN (SELECT job FROM emp WHERE job = 'SALES');
+```
 ### OUTPUT:
 
+![314391930-c579e160-2b9e-4b13-ada1-e2acb75fa130](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/66b98f61-9a65-4649-87f0-6c7ffa31d5c8)
 
 ### Q4) Create a view empv5 (for the table emp) that contains empno, ename, job of the employees who work in dept 10.
 
 ### QUERY:
-
-
+```
+ CREATE VIEW emv5 AS SELECT empno, ename, job FROM emp WHERE deptno = 10;
+```
 ### OUTPUT:
+
+![314392031-cdd31354-fe06-4406-94ee-53a554b220b7](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/51bafb9f-a033-4ad9-989f-cfa5cf65f998)
 
 ### Q5) Create a view with column aliases empv30 that contains empno, ename, sal of the employees who work in dept 30. Also display the contents of the view.
 
 ### QUERY:
-
+```
+CREATE VIEW emv30 AS SELECT empno AS `Employee Number`, ename AS `Employee Name`, sal AS `Salary` FROM emp WHERE deptno = 30;
+```
 
 ### OUTPUT:
+
+![314392112-05e5cdf4-3d5a-4f4d-bd32-094988fb957a](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/86f7dfcd-6eda-4f85-9a10-882d349427bf)
 
 ### Q6) Update the view empv5 by increasing 10% salary of the employees who work as ‘CLERK’. Also confirm the modifications in emp table
 
 ### QUERY:
-
-
+```
+ UPDATE emv5 SET sal = sal * 1.1 WHERE job = 'CLERK';
+ UPDATE emp
+    -> SET sal = sal * 1.10
+    -> WHERE job = 'CLERK';
+```
 ### OUTPUT:
+
+![314392221-07e2c56b-8196-4561-b2f9-ccd0b8e6dc01](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/ba553fd4-1ecb-4aca-9371-bb84e03404a8)
+
+![314392345-07b07451-3405-45af-92c7-988b74e7abd7](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/e7405aa4-0b82-4065-916d-bb66751d2e02)
 
 ## Create a Customer1 Table
 ```sql
@@ -141,31 +165,65 @@ INSERT INTO Salesman1 (salesman_id, name, city, commission) VALUES(5003, 'Lauson
 ### Q7) Write a SQL query to find the salesperson and customer who reside in the same city. Return Salesman, cust_name and city.
 
 ### QUERY:
-
-
+```
+ SELECT salesman1.name AS "Salesman",
+    ->        customer1.cust_name AS "Customer Name",
+    ->        salesman1.city AS "City"
+    -> FROM salesman1
+    -> INNER JOIN customer1 ON salesman1.city = customer1.city;
+```
 ### OUTPUT:
+
+![314392559-fd0954d3-43e7-4628-af2c-e5435cd46cae](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/f5569525-2cfc-4cfe-ab20-a7f598e1cc59)
 
 ### Q8) Write a SQL query to find salespeople who received commissions of more than 13 percent from the company. Return Customer Name, customer city, Salesman, commission.
 
-
 ### QUERY:
-
-
+```
+ SELECT customer1.cust_name AS "Customer Name",
+    ->        customer1.city AS "Customer City",
+    ->        salesman1.name AS "Salesman",
+    ->        salesman1.commission AS "Commission"
+    -> FROM salesman1
+    -> INNER JOIN customer1 ON salesman1.salesman_id = customer1.salesman_id
+    -> WHERE salesman1.commission > 0.13;
+```
 ### OUTPUT:
+
+![314392691-2a8fb401-6496-4218-b5d6-7e6b60e0a328](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/ecbaf05a-c9ee-4005-9f52-2c3f6d81aaba)
 
 ### Q9) Perform Natural join on both tables
 
 ### QUERY:
-
-
+```
+ select * from Customer1 natural join salesman1;
+```
 ### OUTPUT:
+
+![314392784-6efbc3ce-56ce-4391-9dcc-c9098ce20705](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/9586daee-7e32-449e-817a-2f7a768e9274)
 
 ### Q10) Perform Left and right join on both tables
 
 ### QUERY:
+```
+ SELECT *
+    -> FROM salesman1
+    -> LEFT JOIN customer1 ON salesman1.salesman_id = customer1.salesman_id;
 
+ SELECT *
+    -> FROM salesman1
+    -> RIGHT JOIN customer1 ON salesman1.salesman_id = customer1.salesman_id;
+```
 
 ### OUTPUT:
+
+## LEFT JOIN:
+
+![314392967-6c311f89-a040-4bc7-828f-1fa6ed2cf41d](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/d0b32aee-359c-4f61-95e3-d5d4bf5841a6)
+
+## RIGHT JOIN:
+
+![314393098-f4c0f5d0-2a5c-479d-9c29-3b8f6352d8d6](https://github.com/PRAISEYSOLOMON/DBMS/assets/119394259/d123ef4f-03b1-40c6-b90e-68e63d6bab11)
 
 ## RESULT 
 ### Thus the basics of subqueries,views,joins are performed in SQL.
